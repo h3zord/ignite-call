@@ -6,6 +6,7 @@ import { Container, Header } from '../styles'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { convertTimeStringToMinutes } from '@/utils/convert-time-string-to-minutes'
 import { api } from '@/lib/axios'
+import { useRouter } from 'next/router'
 
 import {
   Button,
@@ -88,6 +89,7 @@ export default function TimeIntervals() {
     },
   })
 
+  const router = useRouter()
   const weekDays = getWeekDays()
 
   const { fields } = useFieldArray({
@@ -103,6 +105,8 @@ export default function TimeIntervals() {
     await api.post('/users/time-intervals', {
       intervals,
     })
+
+    await router.push('/register/update-profile')
   }
 
   return (

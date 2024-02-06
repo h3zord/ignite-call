@@ -12,6 +12,7 @@ export default async function handler(
   }
 
   const username = String(req.query.username)
+
   const { date } = req.query
 
   if (!date) {

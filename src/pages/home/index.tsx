@@ -1,8 +1,7 @@
-import { Heading, Text } from '@ignite-ui/react'
 import Image from 'next/image'
-import { Container, Hero, Preview } from './styles'
-
 import previewImage from '../../assets/app-preview.svg'
+import { Heading, Text } from '@h3zord-ui-ignite-call/react'
+import { Container, Hero, Preview } from './styles'
 import { ClaimUsernameForm } from './components/ClaimUsernameForm'
 import { NextSeo } from 'next-seo'
 

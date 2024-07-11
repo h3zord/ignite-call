@@ -1,4 +1,4 @@
-import { Button, Text, TextInput } from '@ignite-ui/react'
+import { Button, Text, TextInput } from '@h3zord-ui-ignite-call/react'
 import { ArrowRight } from 'phosphor-react'
 import { Form, FormAnnotation } from './styles'
 import { z } from 'zod'
@@ -42,7 +42,6 @@ export function ClaimUsernameForm() {
           size="sm"
           prefix="ignite.com/"
           placeholder="seu-usuário"
-          crossOrigin=""
           {...register('username')}
         />
         <Button size="sm" type="submit" disabled={isSubmitting}>

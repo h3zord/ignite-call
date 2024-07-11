@@ -1,12 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import {
-  Button,
-  Checkbox,
-  Heading,
-  MultiStep,
-  Text,
-  TextInput,
-} from '@ignite-ui/react'
 import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
 import { ArrowRight } from 'phosphor-react'
@@ -16,6 +8,14 @@ import { api } from '../../../lib/axios'
 import { convertTimeStringToMinutes } from '../../../utils/convert-time-string-to-minutes'
 import { getWeekDays } from '../../../utils/get-week-days'
 import { Container, Header } from '../styles'
+import {
+  Button,
+  Checkbox,
+  Heading,
+  MultiStep,
+  Text,
+  TextInput,
+} from '@h3zord-ui-ignite-call/react'
 
 import {
   FormError,
@@ -74,7 +74,7 @@ export default function TimeIntervals() {
     control,
     watch,
     formState: { isSubmitting, errors },
-  } = useForm<TimeIntervalsFormInput>({
+  } = useForm<TimeIntervalsFormInput, unknown, TimeIntervalsFormOutput>({
     resolver: zodResolver(timeIntervalsFormSchema),
     defaultValues: {
       intervals: [
@@ -100,8 +100,8 @@ export default function TimeIntervals() {
 
   const intervals = watch('intervals')
 
-  async function handleSetTimeIntervals(data: any) {
-    const { intervals } = data as TimeIntervalsFormOutput
+  async function handleSetTimeIntervals(data: TimeIntervalsFormOutput) {
+    const { intervals } = data
 
     await api.post('/users/time-intervals', {
       intervals,
@@ -116,7 +116,7 @@ export default function TimeIntervals() {
 
       <Container>
         <Header>
-          <Heading as="strong">Quase lá</Heading>
+          <Heading as="strong">Quase lá!</Heading>
           <Text>
             Defina o intervalo de horário que você está disponível em cada dia
             da semana.
@@ -145,6 +145,7 @@ export default function TimeIntervals() {
                         )
                       }}
                     />
+
                     <Text>{weekDays[field.weekDay]}</Text>
                   </IntervalDay>
                   <IntervalInputs>
@@ -154,15 +155,14 @@ export default function TimeIntervals() {
                       step={60}
                       disabled={intervals[index].enabled === false}
                       {...register(`intervals.${index}.startTime`)}
-                      crossOrigin=""
                     />
+
                     <TextInput
                       size="sm"
                       type="time"
                       step={60}
                       disabled={intervals[index].enabled === false}
                       {...register(`intervals.${index}.endTime`)}
-                      crossOrigin=""
                     />
                   </IntervalInputs>
                 </IntervalItem>

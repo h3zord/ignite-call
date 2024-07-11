@@ -53,7 +53,7 @@ export default async function handler(
 
   if (conflictingScheduling) {
     return res.status(400).json({
-      message: 'There is another scheduling at at the same time.',
+      message: 'There is another scheduling at the same time.',
     })
   }
 

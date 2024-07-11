@@ -1,4 +1,4 @@
-import { globalCss } from '@ignite-ui/react'
+import { globalCss } from '@h3zord-ui-ignite-call/react'
 
 export const globalStyles = globalCss({
   '*': {

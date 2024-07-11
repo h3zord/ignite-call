@@ -1,5 +1,4 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Button, Heading, MultiStep, Text, TextInput } from '@ignite-ui/react'
 import { AxiosError } from 'axios'
 import { NextSeo } from 'next-seo'
 import { useRouter } from 'next/router'
@@ -8,8 +7,14 @@ import { useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { api } from '../../lib/axios'
-
 import { Container, Form, FormError, Header } from './styles'
+import {
+  Button,
+  Heading,
+  MultiStep,
+  Text,
+  TextInput,
+} from '@h3zord-ui-ignite-call/react'
 
 const registerFormSchema = z.object({
   username: z
@@ -54,8 +59,7 @@ export default function Register() {
       await router.push('/register/connect-calendar')
     } catch (err) {
       if (err instanceof AxiosError && err?.response?.data?.message) {
-        alert(err.response.data.message)
-        return
+        return alert(err.response.data.message)
       }
 
       console.error(err)
@@ -84,7 +88,6 @@ export default function Register() {
               prefix="ignite.com/"
               placeholder="seu-usuário"
               {...register('username')}
-              crossOrigin=""
             />
 
             {errors.username && (
@@ -94,11 +97,7 @@ export default function Register() {
 
           <label>
             <Text size="sm">Nome completo</Text>
-            <TextInput
-              placeholder="Seu nome"
-              {...register('name')}
-              crossOrigin=""
-            />
+            <TextInput placeholder="Seu nome" {...register('name')} />
 
             {errors.name && (
               <FormError size="sm">{errors.name.message}</FormError>

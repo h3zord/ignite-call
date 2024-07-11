@@ -1,5 +1,5 @@
-import { useQuery } from '@tanstack/react-query'
 import dayjs from 'dayjs'
+import { useQuery } from '@tanstack/react-query'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Calendar } from '../../../../../components/Calendar'
@@ -30,6 +30,7 @@ export function CalendarStep({ onSelectDateTime }: CalendarStepProps) {
   const username = String(router.query.username)
 
   const weekDay = selectedDate ? dayjs(selectedDate).format('dddd') : null
+
   const describedDate = selectedDate
     ? dayjs(selectedDate).format('DD[ de ]MMMM')
     : null
@@ -47,6 +48,7 @@ export function CalendarStep({ onSelectDateTime }: CalendarStepProps) {
 
       return data
     },
+
     enabled: !!selectedDate,
   })
 
@@ -61,7 +63,7 @@ export function CalendarStep({ onSelectDateTime }: CalendarStepProps) {
 
   return (
     <Container isTimePickerOpen={isDateSelected}>
-      <Calendar selectedDate={selectedDate} onDateSelected={setSelectedDate} />
+      <Calendar onDateSelected={setSelectedDate} />
 
       {isDateSelected && (
         <TimePicker>

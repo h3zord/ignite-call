@@ -1,4 +1,4 @@
-import { Box, styled, Text } from '@ignite-ui/react'
+import { Box, styled, Text } from '@h3zord-ui-ignite-call/react'
 
 export const ProfileBox = styled(Box, {
   marginTop: '$6',
@@ -9,7 +9,12 @@ export const ProfileBox = styled(Box, {
   label: {
     display: 'flex',
     flexDirection: 'column',
+    alignItems: 'center',
     gap: '$2',
+
+    textArea: {
+      width: '100%',
+    },
   },
 })
 

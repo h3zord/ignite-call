@@ -10,6 +10,7 @@ import { buildNextAuthOptions } from '@/pages/api/auth/[...nextauth].api'
 import { getServerSession } from 'next-auth'
 import { useRouter } from 'next/router'
 import { api } from '@/lib/axios'
+import { NextSeo } from 'next-seo'
 
 import {
   Avatar,
@@ -18,8 +19,7 @@ import {
   MultiStep,
   Text,
   TextArea,
-} from '@ignite-ui/react'
-import { NextSeo } from 'next-seo'
+} from '@h3zord-ui-ignite-call/react'
 
 const updateProfileSchema = z.object({
   bio: z.string(),
@@ -52,7 +52,7 @@ export default function UpdateProfile() {
       <NextSeo title="Atualize seu perfil | Ignite Call" noindex />
       <Container>
         <Header>
-          <Heading as="strong">Bem-vindo ao Ignite Call!</Heading>
+          <Heading as="strong">Adicione uma descrição!</Heading>
           <Text>
             Precisamos de algumas informações para criar seu perfil! Ah, você
             pode editar essas informações depois.
@@ -64,16 +64,18 @@ export default function UpdateProfile() {
         <ProfileBox as="form" onSubmit={handleSubmit(handleUpdateProfile)}>
           <label>
             <Text>Foto de perfil</Text>
+
             <Avatar
               src={session.data?.user.avatar_url}
-              referrerPolicy="no-referrer"
               alt={session.data?.user.name}
             />
           </label>
 
           <label>
             <Text size="sm">Sobre você</Text>
+
             <TextArea {...register('bio')} />
+
             <FormAnnotation size="sm">
               Fale um pouco sobre você. Isto será exibido em sua página pessoal.
             </FormAnnotation>

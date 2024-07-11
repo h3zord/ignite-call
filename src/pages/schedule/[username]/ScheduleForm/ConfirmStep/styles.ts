@@ -1,4 +1,4 @@
-import { Box, styled, Text } from '@ignite-ui/react'
+import { Box, styled, Text } from '@h3zord-ui-ignite-call/react'
 
 export const ConfirmForm = styled(Box, {
   maxWidth: 540,

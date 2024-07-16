@@ -18,6 +18,7 @@ import {
 } from '@h3zord-ui-ignite-call/react'
 
 import {
+  FormAnnotation,
   FormError,
   IntervalBox,
   IntervalContainer,
@@ -54,12 +55,22 @@ const timeIntervalsFormSchema = z.object({
       (intervals) => {
         return intervals.every(
           (interval) =>
+            interval.startTimeInMinutes % 60 === 0 &&
+            interval.endTimeInMinutes % 60 === 0,
+        )
+      },
+      { message: 'O horário escolhido deve ser uma hora cheia.' },
+    )
+    .refine(
+      (intervals) => {
+        return intervals.every(
+          (interval) =>
             interval.endTimeInMinutes - 60 >= interval.startTimeInMinutes,
         )
       },
       {
         message:
-          'O horário de término deve ser pelo menos 1h distante do início.',
+          'O horário de término deve ser pelo menos 1 hora distante do início.',
       },
     ),
 })
@@ -171,13 +182,18 @@ export default function TimeIntervals() {
           </IntervalContainer>
 
           {errors.intervals && (
-            <FormError size="sm">{errors.intervals.message}</FormError>
+            <FormError size="sm">{errors.intervals.root?.message}</FormError>
           )}
 
           <Button type="submit" disabled={isSubmitting}>
             Próximo passo
             <ArrowRight />
           </Button>
+
+          <FormAnnotation size="sm">
+            Selecione apenas horários cheios. Cada agendamento exigirá 1 hora da
+            sua disponibilidade.
+          </FormAnnotation>
         </IntervalBox>
       </Container>
     </>

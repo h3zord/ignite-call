@@ -5,6 +5,7 @@ import { CaretLeft, CaretRight } from 'phosphor-react'
 import { useMemo, useState } from 'react'
 import { api } from '../../lib/axios'
 import { getWeekDays } from '../../utils/get-week-days'
+import { Skeleton } from '@h3zord-ui-ignite-call/react'
 import {
   CalendarActions,
   CalendarBody,
@@ -59,7 +60,7 @@ export function Calendar({ onDateSelected }: CalendarProps) {
 
   const username = String(router.query.username)
 
-  const { data: blockedDates } = useQuery<BlockedDates>({
+  const { data: blockedDates, isLoading } = useQuery<BlockedDates>({
     queryKey: [
       'blocked-dates',
       currentDate.get('year'),
@@ -147,7 +148,9 @@ export function Calendar({ onDateSelected }: CalendarProps) {
     return calendarWeeks
   }, [currentDate, blockedDates])
 
-  return (
+  return isLoading ? (
+    <Skeleton width={539} height={485} animation="wave" variant="rounded" />
+  ) : (
     <CalendarContainer>
       <CalendarHeader>
         <CalendarTitle>

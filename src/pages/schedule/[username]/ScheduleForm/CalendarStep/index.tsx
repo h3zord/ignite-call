@@ -11,6 +11,7 @@ import {
   TimePickerItem,
   TimePickerList,
 } from './styles'
+import { Skeleton } from '@h3zord-ui-ignite-call/react'
 
 interface Availability {
   possibleTimes: number[]
@@ -39,7 +40,7 @@ export function CalendarStep({ onSelectDateTime }: CalendarStepProps) {
     ? dayjs(selectedDate).format('YYYY-MM-DD')
     : null
 
-  const { data: availability } = useQuery<Availability>({
+  const { data: availability, isLoading } = useQuery<Availability>({
     queryKey: ['availability', selectedDateWithoutTime],
     queryFn: async () => {
       const { data } = await api.get(
@@ -65,27 +66,35 @@ export function CalendarStep({ onSelectDateTime }: CalendarStepProps) {
     <Container isTimePickerOpen={isDateSelected}>
       <Calendar onDateSelected={setSelectedDate} />
 
-      {isDateSelected && (
-        <TimePicker>
-          <TimePickerHeader>
-            {weekDay} <span>{describedDate}</span>
-          </TimePickerHeader>
+      {isDateSelected &&
+        (isLoading ? (
+          <Skeleton
+            width={280}
+            height={485}
+            animation="wave"
+            variant="rounded"
+          />
+        ) : (
+          <TimePicker>
+            <TimePickerHeader>
+              {weekDay} <span>{describedDate}</span>
+            </TimePickerHeader>
 
-          <TimePickerList>
-            {availability?.possibleTimes.map((hour) => {
-              return (
-                <TimePickerItem
-                  key={hour}
-                  onClick={() => handleSelectTime(hour)}
-                  disabled={!availability.availableTimes.includes(hour)}
-                >
-                  {String(hour).padStart(2, '0')}:00h
-                </TimePickerItem>
-              )
-            })}
-          </TimePickerList>
-        </TimePicker>
-      )}
+            <TimePickerList>
+              {availability?.possibleTimes.map((hour) => {
+                return (
+                  <TimePickerItem
+                    key={hour}
+                    onClick={() => handleSelectTime(hour)}
+                    disabled={!availability.availableTimes.includes(hour)}
+                  >
+                    {String(hour).padStart(2, '0')}:00h
+                  </TimePickerItem>
+                )
+              })}
+            </TimePickerList>
+          </TimePicker>
+        ))}
     </Container>
   )
 }

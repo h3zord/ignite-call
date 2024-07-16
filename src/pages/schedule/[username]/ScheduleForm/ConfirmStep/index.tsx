@@ -32,7 +32,7 @@ export function ConfirmStep({
   schedulingDate,
   onCancelConfirmation,
 }: ConfirmStepProps) {
-  const [open, setOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   const {
     register,
@@ -56,9 +56,9 @@ export function ConfirmStep({
         date: schedulingDate,
       })
 
-      setOpen(true)
+      setIsOpen(true)
 
-      setTimeout(() => onCancelConfirmation(), 1500)
+      setTimeout(() => onCancelConfirmation(), 2000)
     } catch (error) {
       console.error(error)
     }
@@ -66,6 +66,9 @@ export function ConfirmStep({
 
   const describedDate = dayjs(schedulingDate).format('DD[ de ]MMMM[ de ]YYYY')
   const describedTime = dayjs(schedulingDate).format('HH:mm[h]')
+  const DescribeDateAndTime = dayjs(schedulingDate).format(
+    'dddd, D [de] MMMM [às] H[h]',
+  )
 
   return (
     <ConfirmForm as="form" onSubmit={handleSubmit(handleConfirmScheduling)}>
@@ -114,16 +117,16 @@ export function ConfirmStep({
           Cancelar
         </Button>
 
-        <Button type="submit" disabled={isSubmitting}>
+        <Button type="submit" disabled={isSubmitting || isOpen}>
           Confirmar
         </Button>
 
         <Toast
           title="Agendamento realizado"
-          description="Agendamento concluído com sucesso!"
-          duration={1500}
-          open={open}
-          onOpenChange={setOpen}
+          description={DescribeDateAndTime}
+          duration={2000}
+          open={isOpen}
+          onOpenChange={setIsOpen}
         />
       </FormActions>
     </ConfirmForm>

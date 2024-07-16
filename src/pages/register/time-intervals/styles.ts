@@ -4,12 +4,12 @@ export const IntervalBox = styled(Box, {
   marginTop: '$6',
   display: 'flex',
   flexDirection: 'column',
+  gap: '$4',
 })
 
 export const IntervalContainer = styled('div', {
   border: '1px solid $gray600',
   borderRadius: '$md',
-  marginBottom: '$4',
 })
 
 export const IntervalItem = styled('div', {
@@ -40,6 +40,12 @@ export const IntervalInputs = styled('div', {
 })
 
 export const FormError = styled(Text, {
-  color: '#f75a68',
-  marginBottom: '$4',
+  color: '$error',
+  textAlign: 'center',
+})
+
+export const FormAnnotation = styled(Text, {
+  color: '$gray200',
+  margin: '0 auto',
+  textAlign: 'center',
 })

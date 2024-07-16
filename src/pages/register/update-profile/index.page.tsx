@@ -53,10 +53,7 @@ export default function UpdateProfile() {
       <Container>
         <Header>
           <Heading as="strong">Adicione uma descrição!</Heading>
-          <Text>
-            Precisamos de algumas informações para criar seu perfil! Ah, você
-            pode editar essas informações depois.
-          </Text>
+          <Text>Precisamos de algumas informações para criar seu perfil!</Text>
 
           <MultiStep size={4} currentStep={4} />
         </Header>

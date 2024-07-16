@@ -41,47 +41,29 @@ export default async function handler(
     )
   })
 
+  const yearMonth = `${year}-${String(month).padStart(2, '0')}`
+
   const blockedDatesRaw: Array<{ date: number }> = await prisma.$queryRaw`
-  SELECT
-    EXTRACT(DAY FROM S.date) AS date,
-    COUNT(S.date) AS amount,
-    ((UTI.time_end_in_minutes - UTI.time_start_in_minutes) / 60) AS size
+      SELECT
+        EXTRACT(DAY FROM S.date) AS date,
+        COUNT(S.date) AS amount,
+        ((UTI.time_end_in_minutes - UTI.time_start_in_minutes) / 60) AS size
 
-  FROM schedulings S
+      FROM schedulings S
 
-  LEFT JOIN user_time_intervals UTI
-    ON UTI.week_day = EXTRACT(DOW FROM (S.date + INTERVAL '1 day')) - 1
+      LEFT JOIN user_time_intervals UTI
+        ON UTI.week_day = EXTRACT(DOW FROM (S.date + INTERVAL '1 day')) - 1
 
-  WHERE S.user_id = ${user.id}
-    AND TO_CHAR(S.date, 'YYYY-MM') = ${`${year}-${month}`}
+      WHERE S.user_id = ${user.id}
+        AND TO_CHAR(S.date, 'YYYY-MM') = ${`${yearMonth}`}
 
-  GROUP BY EXTRACT(DAY FROM S.date),
-    ((UTI.time_end_in_minutes - UTI.time_start_in_minutes) / 60)
+      GROUP BY EXTRACT(DAY FROM S.date),
+        ((UTI.time_end_in_minutes - UTI.time_start_in_minutes) / 60)
 
-  HAVING COUNT(S.date) >= ((UTI.time_end_in_minutes - UTI.time_start_in_minutes) / 60)
-`
+      HAVING COUNT(S.date) >= ((UTI.time_end_in_minutes - UTI.time_start_in_minutes) / 60)
+  `
 
-  // const blockedDatesRaw: Array<{ date: number }> = await prisma.$queryRaw`
-  //   SELECT
-  //     EXTRACT(DAY FROM S.DATE) AS date,
-  //     COUNT(S.date) AS amount,
-  //     ((UTI.time_end_in_minutes - UTI.time_start_in_minutes) / 60) AS size
+  const blockedDates = blockedDatesRaw.map((item) => Number(item.date))
 
-  //   FROM schedulings S
-
-  //   LEFT JOIN user_time_intervals UTI
-  //     ON UTI.week_day = WEEKDAY(DATE_ADD(S.date, INTERVAL 1 DAY))
-
-  //   WHERE S.user_id = ${user.id}
-  //     AND DATE_FORMAT(S.date, "%Y-%m") = ${`${year}-${month}`}
-
-  //   GROUP BY EXTRACT(DAY FROM S.DATE),
-  //     ((UTI.time_end_in_minutes - UTI.time_start_in_minutes) / 60)
-
-  //   HAVING amount >= size
-  // `
-
-  const blockedDates = blockedDatesRaw.map((item) => item.date)
-
-  return res.status(200).json({ blockedWeekDays, blockedDates })
+  return res.json({ blockedWeekDays, blockedDates })
 }

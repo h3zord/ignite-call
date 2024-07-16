@@ -68,9 +68,6 @@ DATABASE_URL="postgresql://postgres.avtxmolkgbgjufgdzbwa:UQ4khamiu7oqBAc3@aws-0-
 // URL do banco de dados usada para as migrations
 DIRECT_URL="postgresql://postgres.avtxmolkgbgjufgdzbwa:UQ4khamiu7oqBAc3@aws-0-sa-east-1.pooler.supabase.com:5432/postgres"
 
-// URL da API
-NEXT_PUBLIC_API_URL=""
-
 // Segredo para criptografia do NextAuth
 NEXTAUTH_SECRET="ih0UIuxn7RVUL5pBPkhlx8BctVHKunDWlq1D6qN9jCA="
 

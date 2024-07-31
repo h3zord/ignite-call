@@ -3,7 +3,7 @@
 <div align="center"><img src="public/icon-app.svg"/></div>
 
 <h2 align="center">
-  <a href="https://app-dt-money.vercel.app" target="_blank">
+  <a href="https://app-ignite-call.vercel.app" target="_blank">
     Conheça o Ignite Call!
   </a>
 </h2>

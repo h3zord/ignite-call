@@ -6,6 +6,7 @@ import { globalStyles } from '../styles/global'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from '../lib/react-query'
 import { DefaultSeo } from 'next-seo'
+import { Header } from '@/components/Header'
 
 globalStyles()
 
@@ -24,6 +25,7 @@ export default function App({
           }}
         />
 
+        <Header />
         <Component {...pageProps} />
       </SessionProvider>
     </QueryClientProvider>

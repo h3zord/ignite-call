@@ -28,12 +28,13 @@ export default async function handler(
     return res.status(400).json({ message: 'User does not exist.' })
   }
 
-  console.log('date =>', date)
-
   const referenceDate = dayjs(String(date))
+
   console.log('referenceDate =>', referenceDate)
 
   const isPastDate = referenceDate.endOf('day').isBefore(new Date())
+
+  console.log('new Date =>', new Date())
 
   if (isPastDate) {
     return res.status(200).json({ possibleTimes: [], availableTimes: [] })
@@ -61,8 +62,6 @@ export default async function handler(
     },
   )
 
-  console.log('Possible Times =>', possibleTimes)
-
   const blockedTimes = await prisma.scheduling.findMany({
     select: {
       date: true,
@@ -76,14 +75,17 @@ export default async function handler(
     },
   })
 
-  console.log('Blocked Times =>', blockedTimes)
-
   const availableTimes = possibleTimes.filter((time) => {
     const isTimeBlocked = blockedTimes.some(
       (blockedTime) => blockedTime.date.getHours() === time,
     )
 
     const isTimeInPast = referenceDate.set('hour', time).isBefore(new Date())
+    console.log('time =>', time)
+
+    console.log('set Hour =>', referenceDate.set('hour', time))
+
+    console.log('isTimeInPast =>', isTimeInPast)
 
     return !isTimeBlocked && !isTimeInPast
   })

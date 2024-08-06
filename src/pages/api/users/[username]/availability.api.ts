@@ -28,7 +28,7 @@ export default async function handler(
     return res.status(400).json({ message: 'User does not exist.' })
   }
 
-  const referenceDate = dayjs(String(date))
+  const referenceDate = dayjs.tz(String(date), 'America/Sao_Paulo')
 
   console.log('referenceDate =>', referenceDate)
 

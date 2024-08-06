@@ -7,14 +7,14 @@ import 'dayjs/locale/pt-br'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../../lib/prisma'
 
+dayjs.locale('pt-br')
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  dayjs.locale('pt-br')
-  dayjs.extend(utc)
-  dayjs.extend(timezone)
-
   if (req.method !== 'GET') {
     return res.status(405).end()
   }
@@ -36,11 +36,11 @@ export default async function handler(
     return res.status(400).json({ message: 'User does not exist.' })
   }
 
-  const referenceDate = dayjs(String(date))
+  const referenceDate = dayjs(String(date)).tz('America/Sao_Paulo')
 
-  console.log('UTC 1 =>', dayjs.utc(String(date)))
+  console.log('Reference date =>', referenceDate)
 
-  console.log('UTC 2 =>', referenceDate.utc())
+  console.log('New Date =>', new Date())
 
   const isPastDate = referenceDate.endOf('day').isBefore(new Date())
 

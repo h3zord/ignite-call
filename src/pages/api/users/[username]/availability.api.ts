@@ -1,5 +1,9 @@
 /* eslint-disable camelcase */
 import dayjs from 'dayjs'
+import utc from 'dayjs/plugin/utc'
+import timezone from 'dayjs/plugin/timezone'
+import 'dayjs/locale/pt-br'
+
 import { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../../lib/prisma'
 
@@ -7,6 +11,10 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  dayjs.locale('pt-br')
+  dayjs.extend(utc)
+  dayjs.extend(timezone)
+
   if (req.method !== 'GET') {
     return res.status(405).end()
   }

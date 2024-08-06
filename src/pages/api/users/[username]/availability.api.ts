@@ -28,9 +28,11 @@ export default async function handler(
     return res.status(400).json({ message: 'User does not exist.' })
   }
 
-  const referenceDate = dayjs.tz(String(date), 'America/Sao_Paulo')
+  const referenceDate = dayjs(String(date))
 
-  console.log('referenceDate =>', referenceDate)
+  console.log('UTC 1 =>', dayjs.utc(String(date)))
+
+  console.log('UTC 2 =>', referenceDate.utc())
 
   const isPastDate = referenceDate.endOf('day').isBefore(new Date())
 

@@ -89,6 +89,10 @@ export default async function handler(
 
     const isTimeInPast = referenceDate.set('hour', time).isBefore(new Date())
 
+    console.log('Set hour =>', referenceDate.set('hour', time))
+
+    console.log('Is time in past =>', isPastDate)
+
     return !isTimeBlocked && !isTimeInPast
   })
 

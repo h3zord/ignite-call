@@ -8,6 +8,16 @@
   </a>
 </h2>
 
+## Demonstração
+
+<div align="center">
+
+  https://github.com/user-attachments/assets/9d776d95-3526-4a6b-9416-5a501e324d2c
+
+</div>
+
+<br/>
+
 ## O que foi desenvolvido?
 
 <strong>Ignite Call</strong> é uma plataforma de agendamentos. Na página principal, o usuário inicia inserindo seu nome de usuário para efetuar um pré-cadastro. Em seguida, é redirecionado para a página de cadastro, onde é necessário preencher o nome completo, com a opção de editar o nome de usuário preenchido anteriormente. Depois, o usuário precisa conectar sua conta do Google para que a aplicação tenha acesso ao Google Calendar e possa efetuar os agendamentos. Na próxima etapa do registro, o usuário deve selecionar o intervalo de horários em que estará disponível, assim como os dias da semana, sendo que cada agendamento exigirá 1 hora da sua disponibilidade. A última etapa do registro consiste em adicionar uma descrição ao perfil. Ao concluir todo o processo de registro, o usuário é direcionado para a página de agendamento, onde um calendário exibe os dias e horários de acordo com a disponibilidade configurada pelo usuário na etapa de registro. Após selecionar a data e o horário, ocorre a última etapa do agendamento, onde é necessário preencher o nome completo, email e observações, se julgar necessário.
@@ -85,7 +95,6 @@ GOOGLE_CLIENT_ID="291363418958-pfvidh3t389hkdnpngogfj5gamolhade.apps.googleuserc
 
 // Segredo do cliente Google OAuth.
 GOOGLE_CLIENT_SECRET="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"
-
 ```
 
 <strong>Next.js irá executar a aplicação na porta padrão 3000.</strong>

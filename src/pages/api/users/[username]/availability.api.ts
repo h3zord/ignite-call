@@ -1,13 +1,11 @@
 /* eslint-disable camelcase */
 import dayjs from 'dayjs'
-// import utc from 'dayjs/plugin/utc'
-import 'dayjs/locale/pt-br'
+import utc from 'dayjs/plugin/utc'
 
 import { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../../lib/prisma'
 
-dayjs.locale('pt-br')
-// dayjs.extend(utc)
+dayjs.extend(utc)
 
 export default async function handler(
   req: NextApiRequest,
@@ -18,6 +16,7 @@ export default async function handler(
   }
 
   const username = String(req.query.username)
+
   const { date } = req.query
 
   if (!date) {
@@ -34,10 +33,9 @@ export default async function handler(
     return res.status(400).json({ message: 'User does not exist.' })
   }
 
-  const referenceDate = dayjs(String(date))
+  const referenceDate = dayjs.utc(String(date))
 
   console.log('Reference date =>', referenceDate)
-  console.log(new Date())
 
   const isPastDate = referenceDate.endOf('day').isBefore(new Date())
 
@@ -74,8 +72,8 @@ export default async function handler(
     where: {
       user_id: user.id,
       date: {
-        gte: referenceDate.set('hour', startHour).toDate(),
-        lte: referenceDate.set('hour', endHour).toDate(),
+        gte: referenceDate.set('hour', startHour + 3).toDate(),
+        lte: referenceDate.set('hour', endHour + 3).toDate(),
       },
     },
   })
@@ -85,9 +83,11 @@ export default async function handler(
       (blockedTime) => blockedTime.date.getHours() === time,
     )
 
-    const isTimeInPast = referenceDate.set('hour', time).isBefore(new Date())
+    const isTimeInPast = referenceDate
+      .set('hour', time + 3)
+      .isBefore(new Date())
 
-    console.log('Set Hour =>', referenceDate.set('hour', time))
+    console.log('Set Hour =>', referenceDate.set('hour', time + 3))
 
     return !isTimeBlocked && !isTimeInPast
   })

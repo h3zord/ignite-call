@@ -1,13 +1,13 @@
 /* eslint-disable camelcase */
 import dayjs from 'dayjs'
-import utc from 'dayjs/plugin/utc'
+// import utc from 'dayjs/plugin/utc'
 import 'dayjs/locale/pt-br'
 
 import { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from '../../../../lib/prisma'
 
 dayjs.locale('pt-br')
-dayjs.extend(utc)
+// dayjs.extend(utc)
 
 export default async function handler(
   req: NextApiRequest,
@@ -34,11 +34,10 @@ export default async function handler(
     return res.status(400).json({ message: 'User does not exist.' })
   }
 
-  const referenceDate = dayjs.utc(String(date))
+  const referenceDate = dayjs(String(date))
 
   console.log('Reference date =>', referenceDate)
-
-  console.log('New Date =>', new Date())
+  console.log(new Date())
 
   const isPastDate = referenceDate.endOf('day').isBefore(new Date())
 
@@ -86,11 +85,9 @@ export default async function handler(
       (blockedTime) => blockedTime.date.getHours() === time,
     )
 
-    const isTimeInPast = referenceDate
-      .set('hour', time + 3)
-      .isBefore(new Date())
+    const isTimeInPast = referenceDate.set('hour', time).isBefore(new Date())
 
-    console.log('Set Hour =>', referenceDate.set('hour', time + 3))
+    console.log('Set Hour =>', referenceDate.set('hour', time))
 
     return !isTimeBlocked && !isTimeInPast
   })

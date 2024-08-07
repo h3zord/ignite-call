@@ -35,15 +35,9 @@ export default async function handler(
     return res.status(400).json({ message: 'User does not exist.' })
   }
 
-  console.log('New Date =>', new Date())
-
   const referenceDate = dayjs.tz(String(date), 'America/Sao_Paulo')
 
-  console.log('Reference date =>', referenceDate)
-
   const isPastDate = referenceDate.endOf('day').isBefore(new Date())
-
-  console.log('End day =>', referenceDate.endOf('day'))
 
   if (isPastDate) {
     return res.status(200).json({ possibleTimes: [], availableTimes: [] })
@@ -84,8 +78,6 @@ export default async function handler(
     },
   })
 
-  console.log(dayjs.tz(blockedTimes[0].date, 'America/Sao_Paulo').hour())
-
   const availableTimes = possibleTimes.filter((time) => {
     const isTimeBlocked = blockedTimes.some(
       (blockedTime) =>
@@ -93,10 +85,6 @@ export default async function handler(
     )
 
     const isTimeInPast = referenceDate.set('hour', time).isBefore(new Date())
-
-    console.log('Set hour =>', referenceDate.set('hour', time))
-
-    console.log('Is time in past =>', isTimeInPast)
 
     return !isTimeBlocked && !isTimeInPast
   })

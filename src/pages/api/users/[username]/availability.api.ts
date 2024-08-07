@@ -84,9 +84,12 @@ export default async function handler(
     },
   })
 
+  console.log(dayjs.tz(blockedTimes[0].date, 'America/Sao_Paulo').hour())
+
   const availableTimes = possibleTimes.filter((time) => {
     const isTimeBlocked = blockedTimes.some(
-      (blockedTime) => blockedTime.date.getHours() === time,
+      (blockedTime) =>
+        dayjs.tz(blockedTime.date, 'America/Sao_Paulo').hour() === time,
     )
 
     const isTimeInPast = referenceDate.set('hour', time).isBefore(new Date())

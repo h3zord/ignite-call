@@ -54,7 +54,7 @@ A aplicação foi desenvolvida com Next.js (versão 14.0.3), React (versão 18) 
 git clone git@github.com:h3zord/ignite-call.git
 ```
 
-### 2 - Entre no repositório
+### 2 - Entre no repositório:
 ```
 cd ignite-call
 ```
@@ -69,17 +69,7 @@ Caso utilize o yarn
 yarn install
 ```
 
-### 4 - Inicie o projeto:
-Caso utilize o npm
-```
-npm run dev
-```
-Caso utilize o yarn
-```
-yarn run dev
-```
-
-### 5 - Configure as variáveis de ambiente:
+### 4 - Configure as variáveis de ambiente:
 ➜ <strong>Crie na raíz do projeto um arquivo .env</strong>
 
 ```javascript
@@ -97,6 +87,16 @@ GOOGLE_CLIENT_ID="291363418958-pfvidh3t389hkdnpngogfj5gamolhade.apps.googleuserc
 
 // Segredo do cliente Google OAuth.
 GOOGLE_CLIENT_SECRET="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"
+```
+
+### 5 - Inicie o projeto:
+Caso utilize o npm
+```
+npm run dev
+```
+Caso utilize o yarn
+```
+yarn run dev
 ```
 
 <strong>Next.js irá executar a aplicação na porta padrão 3000.</strong>

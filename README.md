@@ -24,6 +24,8 @@
 
 A aplicação foi desenvolvida com Next.js (versão 14.0.3), React (versão 18) e TypeScript. As requisições foram construídas utilizando Route Handlers do próprio Next.js. O banco de dados escolhido foi PostgreSQL, em conjunto com Prisma ORM para abstração das queries. Para ter um bom conjunto de padrões, a maioria dos componentes foi fornecida pelo design system [Ignite UI](https://github.com/h3zord/ignite-ui). Para validação dos formulários, foi utilizada a biblioteca Zod em conjunto com React Hook Form. A ferramenta NextAuth.js foi usada para login social, neste caso, o Google. Outras bibliotecas utilizadas incluem: ESLint, Phosphor Icons, Next SEO, Day.js, Axios, TanStack Query para lidar com as requisições e Git para controle de versão.
 
+<strong>➜ O fuso horário está configurado para a região América/São Paulo.</strong>
+
 <strong>➜ A responsividade deste projeto está em desenvolvimento.</strong>
 
 ## Linguagens e ferramentas

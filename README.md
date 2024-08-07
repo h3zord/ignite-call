@@ -59,17 +59,7 @@ git clone git@github.com:h3zord/ignite-call.git
 cd ignite-call
 ```
 
-### 3 - Instale as dependências:
-Caso utilize o npm
-```
-npm install
-```
-Caso utilize o yarn
-```
-yarn install
-```
-
-### 4 - Configure as variáveis de ambiente:
+### 3 - Configure as variáveis de ambiente:
 ➜ <strong>Crie na raíz do projeto um arquivo .env</strong>
 
 ```javascript
@@ -87,6 +77,16 @@ GOOGLE_CLIENT_ID="291363418958-pfvidh3t389hkdnpngogfj5gamolhade.apps.googleuserc
 
 // Segredo do cliente Google OAuth.
 GOOGLE_CLIENT_SECRET="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"
+```
+
+### 4 - Instale as dependências:
+Caso utilize o npm
+```
+npm install
+```
+Caso utilize o yarn
+```
+yarn install
 ```
 
 ### 5 - Inicie o projeto:
